@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rodz Harvey's Personal Website</title>
+  <script src="profilepart.js"></script>
+  <style>
+    :root {
+      --primary-color: #007BFF;
+      --primary-dark: #0056b3;
+      --accent-color: #ffc107;
+      --background: #f4f7fc;
+      --text-color: #333;
+      --white: #fff;
+    }
+    /* Common Modern Header */
+    header {
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    header h1 {
+      font-size: 1.6em;
+      color: var(--white);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: var(--white);
+      font-size: 1em;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: var(--accent-color);
+    }
+    /* Global Body & Gap */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--background);
+      color: var(--text-color);
+      padding-top: 80px;
+    }
+    /* Main Container for Function Integration */
+    .container {
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .content {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .function-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px; /* Reduced gap between items */
+      width: 100%;
+      max-width: 500px;
+    }
+    .function-container h1 {
+      color: var(--primary-dark);
+      text-align: center;
+      font-size: 2em;
+    }
+    .function-container p {
+      text-align: center;
+      font-size: 1.1em;
+      margin-bottom: 0px; 
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+    .options button {
+      background-color: var(--primary-color);
+      color: var(--white);
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.1em;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    .options button:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+    .options button:active {
+      background-color: var(--primary-dark);
+      transform: translateY(2px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    @media (max-width: 768px) {
+      .header-container { flex-direction: column; align-items: flex-start; }
+      nav ul { flex-direction: column; gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Modern Header Navigation -->
+  <header>
+    <div class="header-container">
+      <h1>Rodz Harvey D. Licayan</h1>
+      <nav>
+        <ul>
+          <li><a href="MainFormat.html">Home</a></li>
+          <li><a href="#">Profile</a></li>
+          <li><a href="Galery.html">Gallery</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <!-- Main Content -->
+  <div class="container">
+    <div class="content">
+      <div class="function-container">
+        <h1>FUNCTION INTEGRATION</h1>
+        <p>Pick your Choice:</p>
+        <div class="options">
+          <button onclick="temperatureConverter()">1. Temperature Converter (5 pts)</button>
+          <button onclick="longestWord()">2. The Longer Word (5 pts)</button>
+          <button onclick="knowBirthstone()">3. Know My Birthstone (7 pts)</button>
+          <button onclick="basicOperator()">4. Basic Operators (7 pts)</button>
+          <button onclick="acceleration()">5. Compute for Acceleration (8 pts)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="fuctionintegratioin.js"></script>
+</body>
+</html>

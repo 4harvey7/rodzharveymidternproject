@@ -1,0 +1,130 @@
+:root {
+  --primary-color: #007BFF;
+  --primary-dark: #0056b3;
+  --secondary-color: #28a745;
+  --secondary-dark: #218838;
+  --accent-color: #ffc107;
+  --danger-color: #d9534f;
+  --danger-dark: #c9302c;
+  --background: #f4f7fc;
+  --light-bg: #f9f9f9;
+  --text-color: #333;
+  --subtext-color: #555;
+  --muted-color: #ccc;
+  --sidebar-bg: #343a40;
+  --white: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.top {
+  display: flex;
+  gap: 20px;
+}
+
+.buttonchoss {
+  display: flex;
+}
+
+.buttonchoss button {
+  width: 50%;
+}
+
+
+.top1 .top2 { 
+  border: 2px solid;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  align-items: center;
+}
+
+
+main {
+  display: flex;
+  flex-grow: 1;
+  margin-top: 80px;
+  background-color: var(--light-bg);
+  overflow: hidden;
+}
+
+aside {
+  position: fixed;
+  text-align: center;
+  top: 0;
+  left: 0;
+  width: 270px;
+  height: 100%;
+  background-color: var(--sidebar-bg);
+  padding: 20px;
+  border-right: 2px solid #f1f1f1;
+  overflow-y: auto;
+}
+
+aside h3 {
+  color: white;
+}
+
+aside ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+aside ul li a {
+  text-decoration: none;
+  color: var(--muted-color);
+  display: block;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+aside ul li a:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.content {
+  margin-left: 270px;
+  flex-grow: 1;
+  padding: 20px 40px 60px 40px;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  aside {
+      position: relative;
+      width: 100%;
+      height: auto;
+      border-right: none;
+      border-bottom: 2px solid #f1f1f1;
+  }
+  .content {
+      margin: 0;
+      padding: 20px;
+  }
+}
+
+
+.show_image {
+  position: relative;
+}

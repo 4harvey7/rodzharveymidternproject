@@ -1,0 +1,107 @@
+body {
+    margin: 0px;
+    font-family: Arial;
+    display: flex;
+    justify-content: center;
+}
+
+#content {
+    width: 1000px;
+    padding-bottom: 50px;
+}
+
+#gallery-header {
+    text-align: center;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 20px;
+}
+
+#art-exhibit {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.artwork {
+    width: 300px;
+    height: 350px;
+    background-color: #efefef;
+    margin-top: 30px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+#artwork-1 {
+    background-image: url('images/a.jpg');
+}
+
+#artwork-2 {
+    background-image: url('images/b.png');
+}
+
+#artwork-3 {
+    background-image: url('images/c.jpg');
+}
+
+#artwork-4 {
+    background-image: url('images/d.jpg');
+}
+
+#artwork-5 {
+    background-image: url('images/e.jpg');
+}
+
+#artwork-6 {
+    background-image: url('images/f.jpg');
+}
+
+.heart1 {
+    background-color: #EEF1F2;
+    background-size: 50px 50px;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    top: -40px;
+    left: 240px; 
+    z-index: 5;
+    border-radius: 50%;
+    line-height: 68px;
+    text-align: center;
+}
+
+.heart1_toRed {
+    background-color: red;
+}
+
+.tosmall{
+width: 28px;
+height: 28px;
+}
+
+.heart1:hover{
+
+cursor: pointer;
+}
+
+
+
+.grey{
+background-color: #EFEFEF;
+position: relative;
+width: 300px;
+height: 50px;  
+top: 300px;
+left:0px;
+z-index: 6;  
+opacity: 80%;
+text-align: center;
+line-height: 25px;
+}
+
+.boldy {
+font-weight: bold;
+}

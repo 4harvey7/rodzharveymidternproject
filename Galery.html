@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abstract Art Gallery</title>
+  <style>
+    :root {
+      --primary-color: #007BFF;
+      --primary-dark: #0056b3;
+      --accent-color: #ffc107;
+      --background: #f4f7fc;
+      --text-color: #333;
+      --white: #fff;
+    }
+    /* Modern Header Styles */
+    header {
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+    }
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+    header h1 {
+      font-size: 1.6em;
+      letter-spacing: 0.5px;
+      color: var(--white);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: var(--white);
+      font-size: 1em;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: var(--accent-color);
+    }
+    /* Global Body & Content Gap */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--background);
+      color: var(--text-color);
+      padding-top: 80px; /* for fixed header */
+    }
+    #content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-bottom: 50px;
+    }
+    /* Gallery Styles using CSS Grid */
+    #gallery-header {
+      text-align: center;
+      border-bottom: 1px solid #cccccc;
+      padding-bottom: 20px;
+      color: var(--primary-dark);
+    }
+    #art-exhibit {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    /* Update .artwork to use a portrait aspect ratio (width is shorter than height) */
+    .artwork {
+      background-color: #efefef;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+      cursor: pointer;
+      /* Remove fixed height and use aspect-ratio for a portrait rectangle */
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+    }
+    /* Artwork Backgrounds */
+    #artwork-1 { background-image: url('1.png'); }
+    #artwork-2 { background-image: url('2.jpg'); }
+    #artwork-3 { background-image: url('3.png'); }
+    #artwork-4 { background-image: url('4.jpg'); }
+    #artwork-5 { background-image: url('5.jpg'); }
+    #artwork-6 { background-image: url('6.jpg'); }
+    #artwork-7 { background-image: url('8.jpg'); }
+    #artwork-8 { background-image: url('9.jpg'); }
+    #artwork-9 { background-image: url('10.jpg'); }
+    /* Heart icon (kept) */
+    .heart1 {
+      background-color: #EEF1F2;
+      width: 50px;
+      height: 50px;
+      background-size: 50px 50px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 7;
+      border-radius: 50%;
+      line-height: 68px;
+      text-align: center;
+      transition: background-color 0.3s;
+    }
+    .heart1_toRed { background-color: red; }
+    .tosmall { width: 28px; height: 28px; }
+    .heart1:hover { cursor: pointer; }
+    /* Comment Button */
+    .comment-btn {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--primary-color);
+      color: var(--white);
+      border: none;
+      padding: 8px 16px;
+      cursor: pointer;
+      z-index: 8;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    .comment-btn:hover {
+      background-color: var(--primary-dark);
+    }
+    /* Modal for Comments */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+    .modal-content {
+      background-color: var(--white);
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 500px;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    /* Modal comment area styling */
+    .modal-comment-input {
+      width: 100%;
+      padding: 8px;
+      margin: 10px 0;
+      box-sizing: border-box;
+    }
+    .modal-comment-btn {
+      padding: 8px 12px;
+      background-color: var(--primary-color);
+      border: none;
+      color: var(--white);
+      cursor: pointer;
+    }
+    .modal-comment-btn:hover {
+      background-color: var(--primary-dark);
+    }
+    .comments-list {
+      margin-top: 15px;
+      max-height: 200px;
+      overflow-y: auto;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+    }
+    .comments-list li {
+      list-style: none;
+      margin-bottom: 8px;
+      padding: 4px;
+      border-bottom: 1px solid #eee;
+    }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .header-container { flex-direction: column; align-items: flex-start; }
+      nav ul { flex-direction: column; gap: 10px; }
+      #content { width: 90%; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Modern Header Navigation -->
+  <header>
+    <div class="header-container">
+      <h1>Rodz Harvey D. Licayan</h1>
+      <nav>
+        <ul>
+          <li><a href="MainFormat.html">Home</a></li>
+          <li><a href="profilepart.html">Profile</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <!-- Main Content -->
+  <div id="content">
+    <h2 id="gallery-header">Abstract Art Gallery</h2>
+    <div id="art-exhibit">
+      <!-- Artwork 1 -->
+      <div id="artwork-1" class="artwork">
+        <div class="heart1" id="heart1" onclick="toggleLike('like1')">
+          <img src="heart.png" id="like1" class="tosmall" alt="Heart Icon">
+        </div>
+        <button class="comment-btn" onclick="openCommentModal('artwork-1')">Comment</button>
+      </div>
+      <!-- Artwork 2 -->
+      <div id="artwork-2" class="artwork">
+        <div class="heart1" id="heart2" onclick="toggleLike('like2')">
+          <img src="heart.png" id="like2" class="tosmall" alt="Heart Icon">
+        </div>
+        <button class="comment-btn" onclick="openCommentModal('artwork-2')">Comment</button>
+      </div>
+      <!-- Artwork 3 -->
+      <div id="artwork-3" class="artwork">
+        <div class="heart1" id="heart3" onclick="toggleLike('like3')">
+          <img src="heart.png" id="like3" class="tosmall" alt="Heart Icon">
+        </div>
+        <button class="comment-btn" onclick="openCommentModal('artwork-3')">Comment</button>
+      </div>
+      <!-- Artwork 4 -->
+      <div id="artwork-4" class="artwork">
+        <div class="heart1" id="heart4" onclick="toggleLike('like4')">
+          <img src="heart.png" id="like4" class="tosmall" alt="Heart Icon">
+        </div>
+        <button class="comment-btn" onclick="openCommentModal('artwork-4')">Comment</button>
+      </div>
+      <!-- Artwork 5 -->
+      <div id="artwork-5" class="artwork">
+        <div class="heart1" id="heart5" onclick="toggleLike('like5')">
+          <img src="heart.png" id="like5" class="tosmall" alt="Heart Icon">
+        </div>
+        <button class="comment-btn" onclick="openCommentModal('artwork-5')">Comment</button>
+      </div>
+      <!-- Artwork 6 -->
+      <div id="artwork-6" class="artwork">
+        <div class="heart1" id="heart6" onclick="toggleLike('like6')">
+          <img src="heart.png" id="like6" class="tosmall" alt="Heart Icon">
+        </div>
+        <button class="comment-btn" onclick="openCommentModal('artwork-6')">Comment</button>
+      </div>
+     
+      <!-- Artwork 8 -->
+      <div id="artwork-8" class="artwork">
+        <div class="heart1" id="heart8" onclick="toggleLike('like7')">
+          <img src="heart.png" id="like7" class="tosmall" alt="Heart Icon">
+        </div>
+        <button class="comment-btn" onclick="openCommentModal('artwork-8')">Comment</button>
+      </div>
+      <!-- Artwork 9 -->
+      <div id="artwork-9" class="artwork">
+        <div class="heart1" id="heart9" onclick="toggleLike('like8')">
+          <img src="heart.png" id="like8" class="tosmall" alt="Heart Icon">
+        </div>
+        <button class="comment-btn" onclick="openCommentModal('artwork-9')">Comment</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal for Comments -->
+  <div id="commentModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="self.close()">&times;</span>
+      <input type="text" id="modalCommentInput" class="modal-comment-input" placeholder="Write your comment...">
+      <button class="modal-comment-btn" onclick="postModalComment()">Post Comment</button>
+      <ul id="modalComments" class="comments-list"></ul>
+    </div>
+  </div>
+  
+  <script>
+    // Object to store comments for each artwork
+    let artComments = {};
+    // Track which artwork's modal is open
+    let currentArtId = '';
+
+    function toggleLike(element) {
+      let heartElem = document.getElementById(element);
+      // Check if the image source contains "heart.png"
+      if (heartElem.src.includes("heart.png")) {
+        heartElem.src = "h1RED.png";
+      } else {
+        heartElem.src = "heart.png";
+      }
+    }
+
+
+    function openCommentModal(artId) {
+      currentArtId = artId;
+      loadComments(artId);
+      document.getElementById('commentModal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('commentModal').style.display = 'none';
+      document.getElementById('modalCommentInput').value = '';
+    }
+
+    // Assign our closeModal function to self.close
+    self.close = closeModal;
+
+    function postModalComment() {
+      const input = document.getElementById('modalCommentInput');
+      const comment = input.value.trim();
+      if (!comment) return;
+      if (!artComments[currentArtId]) {
+        artComments[currentArtId] = [];
+      }
+      artComments[currentArtId].push(comment);
+      input.value = '';
+      loadComments(currentArtId);
+    }
+
+    function loadComments(artId) {
+      const modalComments = document.getElementById('modalComments');
+      modalComments.innerHTML = '';
+      if (artComments[artId] && artComments[artId].length > 0) {
+        artComments[artId].forEach(c => {
+          const li = document.createElement('li');
+          li.textContent = c;
+          modalComments.appendChild(li);
+        });
+      } else {
+        modalComments.innerHTML = '<li>No comments yet.</li>';
+      }
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById('commentModal');
+      if (event.target == modal) {
+        closeModal();
+      }
+    }
+  </script>
+</body>
+</html>
